@@ -42,7 +42,7 @@ def generate_launch_description():
                 'simple.sdf'
             ]),
             ' -r'
-            ' -v4'     # Sets the verbosity level to 4
+            ' -v4'
             ]}.items(),
     )
 
