@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Colcon
+build
+install
+log

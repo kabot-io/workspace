@@ -16,5 +16,10 @@ Source: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
 ``` 
 source ~/workspace/source-me.sh
 ```
+## 5. Install dependencies:
+
+```bash
+rosdep install --from-paths src --ignore-src --os ubuntu:noble  -r -i -y --rosdistro jazzy
+```
 
 ## 5. PRACUJ DZIELNIE
