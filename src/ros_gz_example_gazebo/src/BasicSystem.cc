@@ -42,7 +42,7 @@ void BasicSystem::PostUpdate(const gz::sim::UpdateInfo &_info,
 {
   if (!_info.paused && _info.iterations % 1000 == 0)
   {
-    gzdbg << "ros_gz_example_gazebo::BasicSystem::PostUpdate" << std::endl;
+    gzerr << "ros_gz_example_gazebo::BasicSystem::PostUpdate" << std::endl;
   }
 }
 

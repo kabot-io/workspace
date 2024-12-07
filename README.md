@@ -16,6 +16,13 @@ Source: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
 ``` 
 source ~/workspace/source-me.sh
 ```
+
+build eveyrthing and compile commands, also run
+```bash
+colcon build --event-handlers console_direct+ --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.zsh && ros2 launch kabot_bringup simple.launch.py
+```
+
+
 ## 5. Install dependencies:
 
 ```bash
