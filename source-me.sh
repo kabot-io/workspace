@@ -4,7 +4,7 @@ WORKSPACE_ROOT_DIR=$(git rev-parse --show-toplevel)
 
 if [ -z "${WORKSPACE_SETUP}" ]; then
 
-  if [ -f "source /opt/ros/jazzy/setup.bash" ]; then
+  if [ -f "/opt/ros/jazzy/setup.bash" ]; then
     source /opt/ros/jazzy/setup.bash
   else
     echo "setup.bash not found. Please, install ROS2 Jazzy"
