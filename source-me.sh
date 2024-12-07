@@ -20,4 +20,7 @@ if [ -z "${WORKSPACE_SETUP}" ]; then
   export WORKSPACE_SETUP=1
 fi
 
-
+kill_gazebo(){
+  pkill -f gzserver
+  pkill -f gzclient
+}
