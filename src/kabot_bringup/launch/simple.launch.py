@@ -41,6 +41,7 @@ def generate_launch_description():
                 'worlds',
                 'simple.sdf'
             ]),
+            ' -r'
             ' -v4'     # Sets the verbosity level to 4
             ]}.items(),
     )
