@@ -6,6 +6,7 @@ if [ -z "${WORKSPACE_SETUP}" ]; then
 
   if [ -f "/opt/ros/jazzy/setup.bash" ]; then
     source /opt/ros/jazzy/setup.bash
+    source $WORKSPACE_ROOT_DIR/install/setup.bash
   else
     echo "setup.bash not found. Please, install ROS2 Jazzy"
   fi
@@ -20,7 +21,25 @@ if [ -z "${WORKSPACE_SETUP}" ]; then
   export WORKSPACE_SETUP=1
 fi
 
-kill_gazebo(){
+kabot-rebuild(){
+    cd $WORKSPACE_ROOT_DIR
+    rm -rf build log install
+    colcon build
+    source install/setup.bash
+}
+
+kill-gazebo(){
   pkill -f gzserver
   pkill -f gzclient
+}
+
+
+kabot-sdf(){
+    xacro_file="$WORKSPACE_ROOT_DIR/src/kabot_description/models/diff_drive/kabot.urdf.xacro"
+    urdf_file="${xacro_file%.xacro}.urdf"
+    sdf_file="${xacro_file%.xacro}.sdf"
+
+    ros2 run xacro xacro $xacro_file -o $urdf_file
+    gz sdf -p $urdf_file > $sdf_file
+    echo "Converted $xacro_file to $sdf_file"
 }
