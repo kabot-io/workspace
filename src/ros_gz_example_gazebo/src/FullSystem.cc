@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-*/
+ */
 
 // We'll use a string and the gzmsg command below for a brief example.
 // Remove these includes if your plugin doesn't need them.
-#include <string>
 #include <gz/common/Console.hh>
+#include <string>
 
 // This header is required to register plugins. It's good practice to place it
 // in the cc file, like it's done here.
@@ -29,57 +29,40 @@
 
 // This is required to register the plugin. Make sure the interfaces match
 // what's in the header.
-GZ_ADD_PLUGIN(
-    ros_gz_example_gazebo::FullSystem,
-    gz::sim::System,
-    ros_gz_example_gazebo::FullSystem::ISystemConfigure,
-    ros_gz_example_gazebo::FullSystem::ISystemPreUpdate,
-    ros_gz_example_gazebo::FullSystem::ISystemUpdate,
-    ros_gz_example_gazebo::FullSystem::ISystemPostUpdate,
-    ros_gz_example_gazebo::FullSystem::ISystemReset
-)
+GZ_ADD_PLUGIN(ros_gz_example_gazebo::FullSystem, gz::sim::System,
+              ros_gz_example_gazebo::FullSystem::ISystemConfigure,
+              ros_gz_example_gazebo::FullSystem::ISystemPreUpdate,
+              ros_gz_example_gazebo::FullSystem::ISystemUpdate,
+              ros_gz_example_gazebo::FullSystem::ISystemPostUpdate,
+              ros_gz_example_gazebo::FullSystem::ISystemReset)
 
-namespace ros_gz_example_gazebo 
-{
+namespace ros_gz_example_gazebo {
 
 void FullSystem::Configure(const gz::sim::Entity &_entity,
-                const std::shared_ptr<const sdf::Element> &_element,
-                gz::sim::EntityComponentManager &_ecm,
-                gz::sim::EventManager &_eventManager)
-{
-  gzdbg << "ros_gz_example_gazebo::FullSystem::Configure on entity: " << _entity << std::endl;
+                           const std::shared_ptr<const sdf::Element> &_element,
+                           gz::sim::EntityComponentManager &_ecm,
+                           gz::sim::EventManager &_eventManager) {
+  gzdbg << "ros_gz_example_gazebo::FullSystem::Configure on entity: " << _entity
+        << std::endl;
 }
 
 void FullSystem::PreUpdate(const gz::sim::UpdateInfo &_info,
-                           gz::sim::EntityComponentManager &_ecm)
-{
-  if (!_info.paused && _info.iterations % 1000 == 0)
-  {
-    gzdbg << "ros_gz_example_gazebo::FullSystem::PreUpdate" << std::endl;
-  }
+                           gz::sim::EntityComponentManager &_ecm) {
+  gzdbg << "ros_gz_example_gazebo::FullSystem::PreUpdate" << std::endl;
 }
 
 void FullSystem::Update(const gz::sim::UpdateInfo &_info,
-                        gz::sim::EntityComponentManager &_ecm)
-{
-  if (!_info.paused && _info.iterations % 1000 == 0)
-  {
-    gzdbg << "ros_gz_example_gazebo::FullSystem::Update" << std::endl;
-  }
+                        gz::sim::EntityComponentManager &_ecm) {
+  gzdbg << "ros_gz_example_gazebo::FullSystem::Update" << std::endl;
 }
 
 void FullSystem::PostUpdate(const gz::sim::UpdateInfo &_info,
-                            const gz::sim::EntityComponentManager &_ecm) 
-{
-  if (!_info.paused && _info.iterations % 1000 == 0)
-  {
-    gzdbg << "ros_gz_example_gazebo::FullSystem::PostUpdate" << std::endl;
-  }
+                            const gz::sim::EntityComponentManager &_ecm) {
+  gzdbg << "ros_gz_example_gazebo::FullSystem::PostUpdate" << std::endl;
 }
 
 void FullSystem::Reset(const gz::sim::UpdateInfo &_info,
-                       gz::sim::EntityComponentManager &_ecm)
-{
+                       gz::sim::EntityComponentManager &_ecm) {
   gzdbg << "ros_gz_example_gazebo::FullSystem::Reset" << std::endl;
 }
-}  // namespace ros_gz_example_gazebo
+} // namespace ros_gz_example_gazebo
