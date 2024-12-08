@@ -23,7 +23,7 @@ def generate_launch_description():
         launch_arguments={'gz_args': PathJoinSubstitution([
             pkg_project_gazebo,
             'worlds',
-            'simple.sdf'
+            'kabot_training_yard.sdf'
         ])}.items(),
     )
 
@@ -60,8 +60,31 @@ def generate_launch_description():
         output='screen'
     )
 
+    spawn_kabot = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution([
+                get_package_share_directory('ros_gz_sim'),
+                'launch',
+                'gz_spawn_model.launch.py'
+            ])
+        ),
+        launch_arguments={
+            'world': 'kabot_training_yard',
+            'file': PathJoinSubstitution([
+                kabot_description_pkg_dir,
+                'models/kabot',
+                'model.sdf'
+            ]),
+            'name': 'kabot_robot',
+            'x': '0.0',
+            'y': '0.0',
+            'z': '0.0'
+        }.items(),
+    )
+
     return LaunchDescription([
         gz_sim,
+        spawn_kabot,
         rviz_arg,
         bridge,
         robot_state_publisher,
