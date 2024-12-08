@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "llvm-vs-code-extensions.vscode-clangd",
-        "redhat.vscode-xml"
+        "redhat.vscode-xml",
+        "morningfrog.urdf-visualizer"
     ]
 }

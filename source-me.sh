@@ -33,12 +33,10 @@ kill-gazebo(){
   pkill -f gzclient
 }
 
-
 kabot-sdf(){
-    xacro_file="$WORKSPACE_ROOT_DIR/src/kabot_description/models/diff_drive/kabot.urdf.xacro"
+    xacro_file="$WORKSPACE_ROOT_DIR/src/kabot_description/urdf/kabot.xacro"
     urdf_file="${xacro_file%.xacro}.urdf"
-    sdf_file="${xacro_file%.xacro}.sdf"
-
+    sdf_file="$$WORKSPACE_ROOT_DIR/src/kabot_description/models/kabot/kabot.sdf"
     ros2 run xacro xacro $xacro_file -o $urdf_file
     gz sdf -p $urdf_file > $sdf_file
     echo "Converted $xacro_file to $sdf_file"
