@@ -6,6 +6,9 @@
   <xacro:property name="chassis_radius" value="0.06"/>
   <xacro:property name="chassis_height" value="0.07"/>
 
+  <xacro:property name="led_radius" value="0.01"/>
+  <xacro:property name="led_height" value="0.001"/>
+
   <link name="base_link"></link>
   <link name="footprint_link"></link>
   <link name="chassis_link">
@@ -13,7 +16,6 @@
       <geometry>
         <cylinder radius="${chassis_radius}" length="${chassis_height}"/>
       </geometry>
-      <material name="white"/>
     </visual>
     <collision>
       <geometry>
@@ -23,6 +25,31 @@
     <xacro:inertial_cylinder mass="0.1" radius="${chassis_radius}" length="${chassis_height}">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:inertial_cylinder>
+  </link>
+
+  <link name="led_red_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${led_radius}" length="${led_height}"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="led_green_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${led_radius}" length="${led_height}"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="led_blue_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${led_radius}" length="${led_height}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
   </link>
 
   <joint name="footprint_joint" type="fixed">
@@ -37,7 +64,37 @@
     <origin xyz="0.0 0.0 0.0"/>
   </joint>
 
+  <joint name="led_red_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="led_red_link"/>
+    <origin xyz="-0.0334 0.0 ${(chassis_height + led_height)/2}"/>
+  </joint>
+
+  <joint name="led_green_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="led_green_link"/>
+    <origin xyz="0.0225 -0.01975 ${(chassis_height + led_height)/2}"/>
+  </joint>
+
+  <joint name="led_blue_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="led_blue_link"/>
+    <origin xyz="0.0225 0.01975 ${(chassis_height + led_height)/2}"/>
+  </joint>
+
   <gazebo reference="chassis_link">
     <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="led_red_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="led_green_link">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <gazebo reference="led_blue_link">
+    <material>Gazebo/Blue</material>
   </gazebo>
 </robot>

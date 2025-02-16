@@ -1,0 +1,5 @@
+geometry_msgs/Pose kabot_pose
+float64 camera_height
+float64 camera_horizontal_fov
+---
+TrackingTrainingData output

@@ -48,7 +48,7 @@ def generate_launch_description():
        arguments=['-d', os.path.join(kabot_bringup_pkg_dir, 'config', 'diff_drive.rviz')],
        condition=IfCondition(LaunchConfiguration('rviz'))
     )
-    rviz_arg = DeclareLaunchArgument('rviz', default_value='true', description='Open RViz.')
+    rviz_arg = DeclareLaunchArgument('rviz', default_value='false', description='Open RViz.')
 
     bridge = Node(
         package='ros_gz_bridge',

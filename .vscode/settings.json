@@ -1,0 +1,15 @@
+{
+    "python.defaultInterpreterPath": "/bin/python3.12",
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/jazzy/lib/python3.12/site-packages",
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/ros/jazzy/lib/python3.12/site-packages",
+    ],
+    "[python]": {
+
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultColorDecorators": "never"
+    },
+    "ros.distro": "jazzy"
+}

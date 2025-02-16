@@ -7,8 +7,6 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
@@ -19,8 +17,14 @@ set(MSG_FILES
   "msg/KabotMarker.msg"
 )
 
+set(SRV_FILES
+  "srv/GenerateKabotImage.srv"
+  "srv/YoloAnnotation.srv"
+)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${MSG_FILES}
+  ${SRV_FILES}
   DEPENDENCIES geometry_msgs sensor_msgs
 )
 
