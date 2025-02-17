@@ -14,7 +14,8 @@ def generate_launch_description():
     pkg_kabot_description = get_package_share_directory('kabot_description')
     camera_xacro_path = os.path.join(pkg_kabot_description, 'urdf', 'yolo_vertical_camera.xacro')
 
-    world_arg = DeclareLaunchArgument('world_sdf', default_value='kabot_training_yard.sdf')
+    world_sdf_arg = DeclareLaunchArgument('world_sdf', default_value='kabot_training_yard.sdf')
+
     kabot_x_arg = DeclareLaunchArgument('kabot_x', default_value='0.0')
     kabot_y_arg = DeclareLaunchArgument('kabot_y', default_value='0.0')
     kabot_z_arg = DeclareLaunchArgument('kabot_z', default_value='0.0')
@@ -40,7 +41,8 @@ def generate_launch_description():
             'gz_args': PathJoinSubstitution([
                 pkg_project_gazebo,
                 'worlds',
-                LaunchConfiguration('world_sdf')
+                LaunchConfiguration('world_sdf'),
+                 ' --headless-rendering'
             ])
         }.items(),
     )
@@ -82,21 +84,24 @@ def generate_launch_description():
             ])
         ),
         launch_arguments={
-            'world': 'kabot_training_yard',
             'file': PathJoinSubstitution([
                 pkg_kabot_description,
                 'models/kabot',
                 'model.sdf'
             ]),
             'name': 'kabot_robot',
-            'x': '0.0',
-            'y': '0.0',
-            'z': '0.0'
+            'x': LaunchConfiguration('kabot_x'),
+            'y': LaunchConfiguration('kabot_y'),
+            'z': LaunchConfiguration('kabot_z'),
+            'roll':LaunchConfiguration('kabot_roll'),
+            'pitch':LaunchConfiguration('kabot_pitch'),
+            'yaw': LaunchConfiguration('kabot_yaw'),
+            'static': 'true'
         }.items(),
     )
 
     return LaunchDescription([
-        world_arg,
+        world_sdf_arg,
         kabot_x_arg,
         kabot_y_arg,
         kabot_z_arg,
