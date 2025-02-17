@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="yolo_vertical_camera">
-  <xacro:include filename="inertial_macros.xacro"/>
+  <xacro:arg name="camera_height_arg" default=""/>
+  <xacro:arg name="camera_horizontal_fov_arg" default=""/>
+  <xacro:arg name="camera_image_width_arg" default=""/>
+  <xacro:arg name="camera_image_height_arg" default=""/>
+  <xacro:arg name="camera_update_rate_arg" default=""/>
 
-  <xacro:property name="camera_height" default="2.0"/>
-  <xacro:property name="camera_horizontal_fov" default="${3.14159/2}"/>
-  <xacro:property name="camera_image_width" default="1920"/>
-  <xacro:property name="camera_image_height" default="1080"/>
-  <xacro:property name="camera_update_rate" default="30.0"/>
+  <xacro:property name="camera_height" value="$(arg camera_height_arg)"/>
+  <xacro:property name="camera_horizontal_fov" value="$(arg camera_horizontal_fov_arg)"/>
+  <xacro:property name="camera_image_width" value="$(arg camera_image_width_arg)"/>
+  <xacro:property name="camera_image_height" value="$(arg camera_image_height_arg)"/>
+  <xacro:property name="camera_update_rate" value="$(arg camera_update_rate_arg)"/>
 
   <gazebo>
     <static>true</static>

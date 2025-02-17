@@ -23,10 +23,10 @@ def generate_launch_description():
     kabot_yaw_arg = DeclareLaunchArgument('kabot_yaw', default_value='0.0')
 
     camera_height_arg = DeclareLaunchArgument('camera_height', default_value='1.5')
-    camera_fov_arg = DeclareLaunchArgument('camera_horizontal_fov', default_value='${pi/4}')
+    camera_horizontal_fov_arg = DeclareLaunchArgument('camera_horizontal_fov', default_value='1.047')
     camera_width_arg = DeclareLaunchArgument('camera_image_width', default_value='1920')
     camera_height_res_arg = DeclareLaunchArgument('camera_image_height', default_value='1080')
-    camera_framerate_arg = DeclareLaunchArgument('camera_update_rate', default_value='30.0')
+    camera_framerate_arg = DeclareLaunchArgument('camera_update_rate', default_value='20.0')
 
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -53,12 +53,16 @@ def generate_launch_description():
         arguments=[
             '-string',
             Command([
-                'xacro ', camera_xacro_path,
-                ' camera_height:=', LaunchConfiguration('camera_height'),
-                ' camera_horizontal_fov:=', LaunchConfiguration('camera_horizontal_fov')
+                'xacro ', camera_xacro_path, 
+                ' camera_height_arg:=', LaunchConfiguration('camera_height'),
+                ' camera_horizontal_fov_arg:=', LaunchConfiguration('camera_horizontal_fov'),
+                ' camera_image_width_arg:=', LaunchConfiguration('camera_image_width'),
+                ' camera_image_height_arg:=', LaunchConfiguration('camera_image_height'),
+                ' camera_update_rate_arg:=', LaunchConfiguration('camera_update_rate')
             ])
         ]
     )
+
     camera_gazebo_ros_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -100,7 +104,7 @@ def generate_launch_description():
         kabot_pitch_arg,
         kabot_yaw_arg,
         camera_height_arg,
-        camera_fov_arg,
+        camera_horizontal_fov_arg,
         camera_width_arg,
         camera_height_res_arg,
         camera_framerate_arg,
